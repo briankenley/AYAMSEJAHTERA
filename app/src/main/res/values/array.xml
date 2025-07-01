@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="status_options">
+        <item>Aktif</item>
+        <item>Tidak Aktif</item>
+    </string-array>
+    
+    <string-array name="kandang_options">
+        <item>KDG001</item>
+        <item>KDG002</item>
+        <item>KDG003</item>
+    </string-array>
+
+    <string-array name="jenis_vaksin_array">
+        <item>Vaksin A</item>
+        <item>Vaksin B</item>
+        <item>Vaksin C</item>
+        <item>Lainnya</item>
+    </string-array>
+</resources>
