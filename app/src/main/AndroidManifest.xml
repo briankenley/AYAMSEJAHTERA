@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AYAMSEJAHTERA"
         tools:targetApi="31">
         <activity
-            android:name=".TambahJadwalMakanAyamActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".TambahVaksinasiAyamActivity"
@@ -31,7 +31,7 @@
             android:name=".DaftarActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".TambahJadwalMakanAyamActivity"
             android:exported="false" />
         <activity
             android:name=".TambahKandangActivity"

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="24dp"
     android:background="#F7F7F7"
-    tools:context=".login">
+    tools:context=".LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,18 +23,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="E-mail"
+        android:text="UserName"
         android:textColor="#3A2E2E"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/edtUsername"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:hint="Email atau Nomor HP"
-        android:inputType="textEmailAddress"
+        android:hint="UserName"
+        android:inputType="text"
         android:padding="12dp" />
 
     <TextView
@@ -44,7 +45,7 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -62,7 +63,7 @@
         android:textColor="#C6441A" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
