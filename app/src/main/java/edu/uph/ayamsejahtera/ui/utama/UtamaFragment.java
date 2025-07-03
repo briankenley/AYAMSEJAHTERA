@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.uph.ayamsejahtera.databinding.FragmentDashboardBinding;
+import edu.uph.ayamsejahtera.databinding.FragmentUtamaBinding;
 
 public class UtamaFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentUtamaBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         UtamaViewModel utamaViewModel =
                 new ViewModelProvider(this).get(UtamaViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentUtamaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
