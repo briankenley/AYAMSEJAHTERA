@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:background="#F5F5F5"
     tools:context=".ui.akun.AkunFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigation">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,9 +109,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:divider="@drawable/divider_thin"
-                        android:orientation="vertical"
-                        android:showDividers="middle">
+                        android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -120,12 +118,11 @@
 
                             <ImageView
                                 android:id="@+id/icon_profile"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="16dp"
-                                android:src="@drawable/ic_person"
-                                app:tint="#616161" />
+                                android:src="@drawable/ic_person" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -162,14 +159,12 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/ic_warning"
-                                    app:tint="#D32F2F" />
+                                    android:src="@drawable/ic_warning"/>
 
                                 <ImageView
-                                    android:layout_width="24dp"
+                                    android:layout_width="22dp"
                                     android:layout_height="24dp"
-                                    android:src="@drawable/ic_chevron_right"
-                                    app:tint="#BDBDBD" />
+                                    android:src="@drawable/ic_chevron_right" />
                             </LinearLayout>
                         </RelativeLayout>
 
@@ -180,12 +175,11 @@
 
                             <ImageView
                                 android:id="@+id/icon_notif"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="16dp"
-                                android:src="@drawable/ic_notification"
-                                app:tint="#616161" />
+                                android:src="@drawable/ic_notification" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -215,54 +209,10 @@
                                 android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_chevron_right"
-                                app:tint="#BDBDBD" />
+                                android:src="@drawable/ic_chevron_right" />
                         </RelativeLayout>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="16dp">
-
-                            <ImageView
-                                android:id="@+id/icon_tema"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="16dp"
-                                android:src="@drawable/ic_sun"
-                                app:tint="#616161" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_toEndOf="@id/icon_tema"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Tema"
-                                    android:textColor="#212121"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Mode Terang"
-                                    android:textColor="#757575"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-
-                            <com.google.android.material.switchmaterial.SwitchMaterial
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:checked="false" />
-                        </RelativeLayout>
+                        =
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -271,12 +221,11 @@
 
                             <ImageView
                                 android:id="@+id/icon_keluar"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="16dp"
-                                android:src="@drawable/ic_logout"
-                                app:tint="#616161" />
+                                android:src="@drawable/ic_logout" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -306,21 +255,12 @@
                                 android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_chevron_right"
-                                app:tint="#BDBDBD" />
+                                android:src="@drawable/ic_chevron_right" />
                         </RelativeLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>
