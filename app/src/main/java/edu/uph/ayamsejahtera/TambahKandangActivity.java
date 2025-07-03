@@ -8,11 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,10 +18,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import edu.uph.ayamsejahtera.model.Kandang;
 import io.realm.Realm;
 
 public class TambahKandangActivity extends AppCompatActivity {
-    EditText edtNamaKandang,edtIdKandang,edtKapasitas,edtJumlahAyam;
+    EditText edtNamaKandang,edtKapasitas,edtJumlahAyam;
     Button btnSimpan;
 
     Spinner spinnerStatus;
@@ -43,7 +41,6 @@ public class TambahKandangActivity extends AppCompatActivity {
         //Realm.init(this);
 
         edtNamaKandang = findViewById(R.id.edtNamaKandang);
-        edtIdKandang = findViewById(R.id.edtIdKandang);
         btnSimpan = findViewById(R.id.btnSimpan);
         edtKapasitas = findViewById(R.id.edtKapasitas);
         edtJumlahAyam = findViewById(R.id.edtJumlahAyam);
@@ -54,26 +51,14 @@ public class TambahKandangActivity extends AppCompatActivity {
         String usernamedef = getResources().getString(R.string.username_key);
         String username = sharedPref.getString(getString(R.string.username_key), usernamedef);
 
-        edtNama.setText(username);
-        edtProdi.setText(getIntent().getStringExtra("prodi").toString());
+        edtNamaKandang.setText(username);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        btnSimpan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String nama = edtNama.getText().toString();
-                String prodi = edtProdi.getText().toString();
-                String fakultas = "Fakultas Teknologi Informasi";
-                int nilaimobile=Integer.parseInt(edtMobile.getText().toString());
-                int nilaibisnis=Integer.parseInt(edtBisnis.getText().toString());
-                String jenisKelamin="";
-                if(rdbPria.isChecked()) jenisKelamin=rdbPria.getText().toString();
-                else if(rdbWanita.isChecked()) jenisKelamin=rdbWanita.getText().toString();
-                String hobi="";
-                if(ckbBasket.isChecked()) hobi+=ckbBasket.getText().toString();
-                if(ckbMasak.isChecked()) hobi+=","+ckbMasak.getText().toString();
-                txvHasil.setText(toUpperCase(nama) +"\n Jenis Kelamin "+jenisKelamin
-                        +"\n Hobi "+hobi
-                        + "\n Program Studi " + toUpperCase(prodi)
-                        +"\n"+ toUpperCase(cekFakultas(prodi))+"\n IPK "+String.valueOf(hitungIPK(nilaibisnis,nilaimobile)));
+                String namaKandang = edtNamaKandang.getText().toString();
+                int kapasitas = Integer.parseInt(edtKapasitas.getText().toString());
+                int jumlahAyam = Integer.parseInt(edtJumlahAyam.getText().toString());
+                String status = spinnerStatus.getSelectedItem().toString();
                 simpanData();
 
             }
@@ -81,85 +66,34 @@ public class TambahKandangActivity extends AppCompatActivity {
     }
 
     public void simpanData(){
-        String nama = edtNama.getText().toString();
-        String prodi = edtProdi.getText().toString();
-        String fakultas = "Fakultas Teknologi Informasi";
-        Double nilaimobile=Double.parseDouble(edtMobile.getText().toString());
-        Double nilaibisnis=Double.parseDouble(edtBisnis.getText().toString());
-        String jenisKelamin="-";
-        if(rdbPria.isChecked()) jenisKelamin=rdbPria.getText().toString();
-        else if(rdbWanita.isChecked()) jenisKelamin=rdbWanita.getText().toString();
-        String jk = jenisKelamin;
-        String hobi="";
-        if(ckbBasket.isChecked()) hobi+=ckbBasket.getText().toString();
-        if(ckbMasak.isChecked()) hobi+=","+ckbMasak.getText().toString();
-        String hobby = hobi;
+        String namaKandang = edtNamaKandang.getText().toString();
+        Double kapasitas=Double.parseDouble(edtKapasitas.getText().toString());
+        Double jumlahAyam=Double.parseDouble(edtJumlahAyam.getText().toString());
+        Spinner status = findViewById(R.id.spinnerStatus);
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(r -> {
-            Number maxId = r.where(Mahasiswa.class).max("studentID");
+            Number maxId = r.where(Kandang.class).max("kandangID");
             int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
-            Mahasiswa mhs = r.createObject(Mahasiswa.class, nextId);
-            mhs.setNama(nama);
-            mhs.setProdi(prodi);
-            mhs.setJenisKelamin(jk);
-            mhs.setNilaiBisnis(nilaibisnis);
-            mhs.setNilaiMobile(nilaimobile);
-            mhs.setHobi(hobby);
+            Kandang kdg = r.createObject(Kandang.class, nextId);
+            kdg.setNamaKandang(namaKandang);
+            kdg.setKapasitas(kapasitas);
+            kdg.setJumlahAyam(jumlahAyam);
+            kdg.setStatus(status);
         });
         Toast.makeText(this, "Data tersimpan", Toast.LENGTH_SHORT).show();
     }
 
-    public double hitungIPK(int nilaiBisnis,int nilaiMobile){
-        return (((getbobot(nilaiBisnis)*3)+(getbobot(nilaiMobile)*3))/6);
-    }
-    public double getbobot(int nilai){
-        if(nilai>=90)
-            return 4.0;
-        else if(nilai>=80 && nilai<90)
-            return 3.5;
-        else if(nilai>=70 && nilai<80)
-            return 3.0;
-        else if(nilai>=60 && nilai<70)
-            return 2.5;
-        else if(nilai>=50 && nilai<60)
-            return 2.0;
-        else
-            return 0.0;
-    }
-    public String cekFakultas(String prodi){
-        if(prodi.toLowerCase().equals("sistem informasi") ||
-                prodi.equals("si"))
-            return "Fakultas Teknologi Informasi";
-        else if (prodi.toLowerCase().equals("informatika")) {
-            return "Fakultas Teknologi Informasi";
-        }
-        else if (prodi.toLowerCase().equals("akuntansi") ||
-                prodi.toLowerCase().equals("manajemen")||
-                prodi.toLowerCase().equals("perhotelan")) {
-            return "Fakultas Ekonomi dan Bisnis";
-        }
-        else if (prodi.toLowerCase().equals("hukum")) {
-            return "Fakultas Hukum";
-        }
-        else
-            return "Fakultas Tidak Ditemukan";
-    }
-
-    public String toUpperCase(String str){
-        return  str.substring(0, 1).toUpperCase() + str.substring(1);
-    }
-
     public void bersihkanForm(){
-        edtNama.setText("");
-        edtProdi.setText("");
-        edtBisnis.setText("");
-        edtMobile.setText("");
+        edtNamaKandang.setText("");
+        edtKapasitas.setText("");
+        edtJumlahAyam.setText("");
+        spinnerStatus.setSelection(0);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_profil, menu);
+        inflater.inflate(R.menu.menu_daftarkandang, menu);
         return true;
     }
 
