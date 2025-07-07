@@ -21,7 +21,7 @@
             <RelativeLayout
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="60dp"
                 android:background="#A22D00"
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="15dp">

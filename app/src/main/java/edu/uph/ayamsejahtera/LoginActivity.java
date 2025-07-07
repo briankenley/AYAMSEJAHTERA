@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView; // <-- Tambahkan import ini
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +23,7 @@ import io.realm.RealmConfiguration;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText edtUsername, edtPassword;
+    TextView textViewRegister;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
@@ -36,12 +38,11 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        //init realm
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("default.realm")
                 .schemaVersion(1)
-                .allowWritesOnUiThread(true) // sementara aktifkan untuk demo
+                .allowWritesOnUiThread(true)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
@@ -49,26 +50,32 @@ public class LoginActivity extends AppCompatActivity {
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
+
         edtUsername = findViewById(R.id.edtUsername);
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        textViewRegister = findViewById(R.id.textViewRegister);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Login();
             }
         });
 
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, DaftarActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void Login(){
         if(edtUsername.getText().toString().equals("Budi")&&
                 edtPassword.getText().toString().equals("123456")){
-            //simpan username
             editor.putString(getString(R.string.username_key), edtUsername.getText().toString());
             editor.apply();
-            editor.commit();
-//            Toast.makeText(getApplicationContext(), editor.commit(), Toast.LENGTH_LONG).show();
-            //pindah activity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }

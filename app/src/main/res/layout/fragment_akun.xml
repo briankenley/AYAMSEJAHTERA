@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="#F5F5F5"
     tools:context=".ui.akun.AkunFragment">
 
     <ScrollView
@@ -20,7 +19,7 @@
             <RelativeLayout
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="60dp"
                 android:background="#A22D00"
                 android:paddingHorizontal="16dp">
 
@@ -33,6 +32,7 @@
                     android:src="@drawable/ic_back"/>
 
                 <TextView
+                    android:id="@+id/textAkun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -215,6 +215,7 @@
                         =
 
                         <RelativeLayout
+                            android:id="@+id/keluar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="16dp">
