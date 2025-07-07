@@ -14,35 +14,44 @@
         tools:targetApi="31">
         <activity
             android:name=".JadwalVaksinAyamActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".TambahVaksinasiAyamActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".JadwalMakanAyamActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".DaftarKandangActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".DaftarActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".TambahJadwalMakanAyamActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".TambahKandangActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:label="@string/app_name">
+            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
