@@ -1,5 +1,6 @@
 package edu.uph.ayamsejahtera.ui.utama;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import edu.uph.ayamsejahtera.DaftarKandangActivity;
+import edu.uph.ayamsejahtera.JadwalMakanAyamActivity;
+import edu.uph.ayamsejahtera.JadwalVaksinAyamActivity;
 import edu.uph.ayamsejahtera.databinding.FragmentUtamaBinding;
 
 public class UtamaFragment extends Fragment {
@@ -26,6 +30,20 @@ public class UtamaFragment extends Fragment {
 
         final TextView textView = binding.textDashboard;
         utamaViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        binding.btnDaftarKandang.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DaftarKandangActivity.class);
+            startActivity(intent);
+        });
+        binding.btnJadwalMakan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), JadwalMakanAyamActivity.class); //
+            startActivity(intent);
+        });
+        binding.btnJadwalVaksin.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), JadwalVaksinAyamActivity.class); //
+            startActivity(intent);
+        });
+
         return root;
     }
 

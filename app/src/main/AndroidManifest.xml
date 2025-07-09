@@ -13,45 +13,38 @@
         android:theme="@style/Theme.AYAMSEJAHTERA"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".JadwalVaksinAyamActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".TambahVaksinasiAyamActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".JadwalMakanAyamActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".DaftarKandangActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".DaftarActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".TambahJadwalMakanAyamActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".TambahKandangActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AYAMSEJAHTERA.NoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

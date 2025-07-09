@@ -11,16 +11,21 @@ public class Kandang extends RealmObject {
     private String namaKandang;
     private Double kapasitas,jumlahAyam;
 
-    private Spinner status;
+    private String status;
 
     public Kandang() {
+        // Default constructor required by Realm
     }
 
-    public Kandang(String namaKandang, Double kapasitas, Double jumlahAyam, Spinner status, int kandangID) {
+    public Kandang(String namaKandang, Double kapasitas, Double jumlahAyam, Spinner statusSpinner, int kandangID) {
         this.namaKandang = namaKandang;
         this.kapasitas = kapasitas;
         this.jumlahAyam = jumlahAyam;
-        this.status = status;
+        if (statusSpinner != null && statusSpinner.getSelectedItem() != null) {
+            this.status = statusSpinner.getSelectedItem().toString();
+        } else {
+            this.status = null; // Or set a default status string if appropriate
+        }
         this.kandangID = kandangID;
     }
 
@@ -48,11 +53,11 @@ public class Kandang extends RealmObject {
         this.jumlahAyam = jumlahAyam;
     }
 
-    public Spinner getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Spinner status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -68,7 +73,7 @@ public class Kandang extends RealmObject {
     public String toString() {
         return "Kandang{" +
                 "namaKandang='" + namaKandang + '\'' +
-                ", kandangID=" + kandangID + '\'' +
+                ", kandangID=" + kandangID + // Corrected: removed extra quote here
                 ", kapasitas='" + kapasitas + '\'' +
                 ", jumlahAyam='" + jumlahAyam + '\'' +
                 ", status='" + status + '\'' +

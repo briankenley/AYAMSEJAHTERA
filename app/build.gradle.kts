@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.activity)
+    implementation("androidx.core:core:1.12.0")
     implementation("io.realm:realm-android-library:10.15.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

@@ -18,68 +18,59 @@ import edu.uph.ayamsejahtera.model.Kandang;
 import io.realm.Realm;
 
 public class KandangAdapter extends ArrayAdapter<Kandang> {
-    public KandangAdapter(@NonNull Context context, ArrayList<Kandang> arrayList) {
+    private Context mContext;
+    private ArrayList<Kandang> dataSet;
 
-        // pass the context and arrayList for the super
-        // constructor of the ArrayAdapter class
-        super(context, 0, arrayList);
+    public KandangAdapter(@NonNull Context context, ArrayList<Kandang> list) {
+        super(context, 0, list);
+        this.mContext = context;
+        this.dataSet = list;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        // convertView which is recyclable view
-        View currentItemView = convertView;
-
-        // of the recyclable view is null then inflate the custom layout for the same
-        if (currentItemView == null) {
-            currentItemView = LayoutInflater.from(getContext()).inflate(R.layout.layoutdaftarkandang, parent,
-                    false);
+        View listItem = convertView;
+        if (listItem == null) {
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.layoutdaftarkandang, parent, false);
         }
 
-        // get the position of the view from the ArrayAdapter
-        Kandang currentNumberPosition = getItem(position);
+        Kandang currentKandang = dataSet.get(position);
 
-        //numbersImage.setImageResource(currentNumberPosition.getNumbersImageId());
+        TextView tvNama = listItem.findViewById(R.id.kandang_1_title);
+        tvNama.setText(currentKandang.getNamaKandang());
 
-        // then according to the position of the view assign the desired TextView 1 for the same
-        TextView textView1 = currentItemView.findViewById(R.id.kandang_1_title);
-        assert currentNumberPosition != null;
-        textView1.setText(currentNumberPosition.getNamaKandang());
+        TextView tvId = listItem.findViewById(R.id.value_id_1);
+        tvId.setText("KDG" + String.format("%03d", currentKandang.getKandangID())); // Menampilkan ID
 
-        // then according to the position of the view assign the desired TextView 2 for the same
+        TextView tvKapasitas = listItem.findViewById(R.id.value_kapasitas_1);
+        tvKapasitas.setText(String.valueOf(currentKandang.getKapasitas()));
 
-        TextView textView2 = currentItemView.findViewById(R.id.value_id_1);
-        textView2.setText(String.valueOf(currentNumberPosition.getKapasitas()));
+        TextView tvJumlah = listItem.findViewById(R.id.value_jumlah_1);
+        tvJumlah.setText(String.valueOf(currentKandang.getJumlahAyam()));
 
-        TextView textView3 = currentItemView.findViewById(R.id.value_kapasitas_1);
-        textView3.setText(String.valueOf(currentNumberPosition.getKapasitas()));
+        TextView tvStatus = listItem.findViewById(R.id.value_status_1);
+        tvStatus.setText(currentKandang.getStatus());
 
-        TextView textView4 = currentItemView.findViewById(R.id.value_jumlah_1);
-        textView4.setText(String.valueOf(currentNumberPosition.getJumlahAyam()));
-
-        ImageView imvdelete = currentItemView.findViewById(R.id.delete_icon_1);
-        imvdelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteKandang(currentNumberPosition.getKandangID());
-            }
+        ImageView imvDelete = listItem.findViewById(R.id.delete_icon_1);
+        imvDelete.setOnClickListener(v -> {
+            deleteKandang(currentKandang, position);
         });
 
-        // then return the recyclable view
-        return currentItemView;
+        return listItem;
     }
-    private void deleteKandang(long id) {
+
+    private void deleteKandang(Kandang kandang, int position) {
         Realm realm = Realm.getDefaultInstance();
-        Kandang mhs = realm.where(Kandang.class).equalTo("kandangID", id).findFirst();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                mhs.deleteFromRealm();
-                remove(mhs);
+        realm.executeTransaction(r -> {
+            Kandang itemToDelete = r.where(Kandang.class).equalTo("kandangID", kandang.getKandangID()).findFirst();
+            if (itemToDelete != null) {
+                itemToDelete.deleteFromRealm();
+                // Hapus dari dataset adapter dan notifikasi perubahan
+                dataSet.remove(position);
                 notifyDataSetChanged();
             }
         });
+        realm.close();
     }
 }

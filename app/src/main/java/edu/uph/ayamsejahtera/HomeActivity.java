@@ -27,6 +27,8 @@ public class HomeActivity extends AppCompatActivity {
 
         MaterialButton emailButton = findViewById(R.id.emailButton);
         MaterialButton phoneButton = findViewById(R.id.phoneButton);
+        MaterialButton faceIdButton = findViewById(R.id.faceIdButton);
+        MaterialButton googleButton = findViewById(R.id.googleButton);
         TextView loginLink = findViewById(R.id.loginLink);
 
         View.OnClickListener goToLoginListener = new View.OnClickListener() {
@@ -40,5 +42,8 @@ public class HomeActivity extends AppCompatActivity {
         emailButton.setOnClickListener(goToLoginListener);
         phoneButton.setOnClickListener(goToLoginListener);
         loginLink.setOnClickListener(goToLoginListener);
+        faceIdButton.setOnClickListener(goToLoginListener);
+        googleButton.setOnClickListener(goToLoginListener);
+
     }
 }
