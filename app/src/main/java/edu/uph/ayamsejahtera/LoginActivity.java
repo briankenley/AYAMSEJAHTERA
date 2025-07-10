@@ -8,7 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView; // <-- Tambahkan import ini
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,8 +17,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import edu.uph.ayamsejahtera.adapter.KandangAdapter;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import edu.uph.ayamsejahtera.model.Kandang;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
@@ -43,9 +45,12 @@ public class LoginActivity extends AppCompatActivity {
                 .name("default.realm")
                 .schemaVersion(1)
                 .allowWritesOnUiThread(true)
+                .allowQueriesOnUiThread(true)
+                .addModule(new KandangModule())
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);
+
 
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
@@ -72,12 +77,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void Login(){
-        if(edtUsername.getText().toString().equals("Budi")&&
-                edtPassword.getText().toString().equals("123456")){
-            editor.putString(getString(R.string.username_key), edtUsername.getText().toString());
-            editor.apply();
+        if(!edtUsername.getText().toString().isEmpty() && !edtPassword.getText().toString().isEmpty()){
             Intent intent = new Intent(this, MainActivity.class);
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            String username = edtUsername.getText().toString();
+            intent.putExtra("USERNAME_EXTRA", username);
+
             startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Username dan Password tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
     }
 }

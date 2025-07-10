@@ -38,19 +38,31 @@ public class KandangAdapter extends ArrayAdapter<Kandang> {
         Kandang currentKandang = dataSet.get(position);
 
         TextView tvNama = listItem.findViewById(R.id.kandang_1_title);
-        tvNama.setText(currentKandang.getNamaKandang());
+        // Tambahkan pengecekan null
+        if (currentKandang.getNamaKandang() != null) {
+            tvNama.setText(currentKandang.getNamaKandang());
+        }
 
         TextView tvId = listItem.findViewById(R.id.value_id_1);
-        tvId.setText("KDG" + String.format("%03d", currentKandang.getKandangID())); // Menampilkan ID
+        tvId.setText("KDG" + String.format("%03d", currentKandang.getKandangID()));
 
         TextView tvKapasitas = listItem.findViewById(R.id.value_kapasitas_1);
-        tvKapasitas.setText(String.valueOf(currentKandang.getKapasitas()));
+        // Tambahkan pengecekan null
+        if (currentKandang.getKapasitas() != null) {
+            tvKapasitas.setText(String.valueOf(currentKandang.getKapasitas()));
+        }
 
         TextView tvJumlah = listItem.findViewById(R.id.value_jumlah_1);
-        tvJumlah.setText(String.valueOf(currentKandang.getJumlahAyam()));
+        // Tambahkan pengecekan null
+        if (currentKandang.getJumlahAyam() != null) {
+            tvJumlah.setText(String.valueOf(currentKandang.getJumlahAyam()));
+        }
 
         TextView tvStatus = listItem.findViewById(R.id.value_status_1);
-        tvStatus.setText(currentKandang.getStatus());
+        // Tambahkan pengecekan null
+        if (currentKandang.getStatus() != null) {
+            tvStatus.setText(currentKandang.getStatus());
+        }
 
         ImageView imvDelete = listItem.findViewById(R.id.delete_icon_1);
         imvDelete.setOnClickListener(v -> {
