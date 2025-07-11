@@ -21,6 +21,9 @@ public class DaftarKandangActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
+
         super.onCreate(savedInstanceState);
         // EdgeToEdge dan WindowInsets listener biarkan seperti semula
         setContentView(R.layout.activity_daftar_kandang);

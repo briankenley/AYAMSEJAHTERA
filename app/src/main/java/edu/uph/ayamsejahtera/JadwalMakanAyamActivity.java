@@ -1,24 +1,60 @@
 package edu.uph.ayamsejahtera;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.Button;
+import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
+
+import edu.uph.ayamsejahtera.adapter.JadwalMakanAdapter;
+import edu.uph.ayamsejahtera.model.JadwalMakan;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class JadwalMakanAyamActivity extends AppCompatActivity {
+
+    private Realm realm;
+    private ListView lsvJadwalMakanAyam;
+    private JadwalMakanAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_jadwal_makan_ayam);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        realm = Realm.getDefaultInstance();
+
+        lsvJadwalMakanAyam = findViewById(R.id.lsvJadwalMakanAyam);
+        Button buttonTambah = findViewById(R.id.btnTambah);
+
+        buttonTambah.setOnClickListener(v -> {
+            Intent intent = new Intent(JadwalMakanAyamActivity.this, TambahJadwalMakanAyamActivity.class);
+            startActivity(intent);
         });
+
+        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadJadwalMakan();
+    }
+
+    private void loadJadwalMakan() {
+        RealmResults<JadwalMakan> jadwalMakanResults = realm.where(JadwalMakan.class).findAll();
+        // Menggunakan RealmResults secara langsung lebih efisien
+        adapter = new JadwalMakanAdapter(this, realm.copyFromRealm(jadwalMakanResults));
+        lsvJadwalMakanAyam.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (realm != null && !realm.isClosed()) {
+            realm.close();
+        }
     }
 }

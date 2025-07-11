@@ -4,23 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import edu.uph.ayamsejahtera.adapter.KandangAdapter;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import edu.uph.ayamsejahtera.model.Kandang;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
@@ -32,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -40,15 +35,20 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Inisialisasi Realm
         Realm.init(this);
+
+        // [PERBAIKAN] Konfigurasi Realm disederhanakan tanpa .modules()
         RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("default.realm")
+                .name("kandang.realm")
                 .schemaVersion(1)
+                // Baris .modules(new KandangModule()) dihapus.
+                // Realm akan otomatis mendeteksi semua kelas model Anda.
                 .allowWritesOnUiThread(true)
-                .allowQueriesOnUiThread(true)
-                .addModule(new KandangModule())
                 .deleteRealmIfMigrationNeeded()
                 .build();
+
+        // Tetapkan sebagai konfigurasi default untuk seluruh aplikasi
         Realm.setDefaultConfiguration(config);
 
 
@@ -61,34 +61,41 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         textViewRegister = findViewById(R.id.textViewRegister);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Login();
-            }
-        });
+        btnLogin.setOnClickListener(v -> Login());
 
-        textViewRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, DaftarActivity.class);
-                startActivity(intent);
-            }
+        textViewRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, DaftarActivity.class);
+            startActivity(intent);
         });
     }
 
     public void Login(){
-        if(!edtUsername.getText().toString().isEmpty() && !edtPassword.getText().toString().isEmpty()){
-            Intent intent = new Intent(this, MainActivity.class);
+        String username = edtUsername.getText().toString().trim();
+        String password = edtPassword.getText().toString().trim();
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-            String username = edtUsername.getText().toString();
-            intent.putExtra("USERNAME_EXTRA", username);
-
-            startActivity(intent);
-            finish();
-        } else {
+        if(username.isEmpty() || password.isEmpty()){
             Toast.makeText(this, "Username dan Password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Logika validasi login (contoh)
+        // Anda perlu menyesuaikan ini dengan model User yang sudah dibuat
+        try (Realm realm = Realm.getDefaultInstance()) {
+            // Ganti edu.uph.ayamsejahtera.model.User.class dengan kelas User Anda jika berbeda
+            edu.uph.ayamsejahtera.User user = realm.where(edu.uph.ayamsejahtera.User.class).equalTo("username", username).findFirst();
+
+            if (user != null && user.getPassword().equals(password)) {
+                // Login Berhasil
+                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("USERNAME_EXTRA", username);
+                startActivity(intent);
+                finish();
+            } else {
+                // Login Gagal
+                Toast.makeText(this, "Username atau Password salah", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
