@@ -10,7 +10,7 @@ public class DeteksiSuhuViewModel extends ViewModel {
 
     public DeteksiSuhuViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("Deteksi Suhu Kandang");
     }
 
     public LiveData<String> getText() {

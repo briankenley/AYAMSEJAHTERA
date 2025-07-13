@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_utama"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:id="@+id/halaman_utama"
+        android:icon="@drawable/ic_utama"
         android:title="Utama" />
 
     <item
-        android:id="@+id/navigation_deteksi_suhu"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:id="@+id/halaman_deteksisuhu"
+        android:icon="@drawable/ic_deteksisuhu"
         android:title="Deteksi Suhu"/>
 
     <item
-        android:id="@+id/navigation_akun"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:id="@+id/halaman_akun"
+        android:icon="@drawable/ic_akun"
         android:title="Akun" />
 
 </menu>

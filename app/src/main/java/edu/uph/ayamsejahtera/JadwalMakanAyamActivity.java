@@ -24,8 +24,6 @@ public class JadwalMakanAyamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal_makan_ayam);
 
-        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
-
         realm = Realm.getDefaultInstance();
         lsvJadwalMakanAyam = findViewById(R.id.lsvJadwalMakanAyam);
         Button buttonTambah = findViewById(R.id.btnTambah);

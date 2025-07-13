@@ -32,7 +32,6 @@ public class DaftarKandangActivity extends AppCompatActivity {
         // EdgeToEdge dan WindowInsets listener biarkan seperti semula
         setContentView(R.layout.activity_daftar_kandang);
 
-        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
 
         realm = Realm.getDefaultInstance();
 

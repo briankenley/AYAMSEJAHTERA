@@ -1,6 +1,8 @@
 package edu.uph.ayamsejahtera.ui.utama;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 import edu.uph.ayamsejahtera.DaftarKandangActivity;
 import edu.uph.ayamsejahtera.JadwalMakanAyamActivity;
 import edu.uph.ayamsejahtera.JadwalVaksinAyamActivity;
+import edu.uph.ayamsejahtera.NotificationActivity;
+import edu.uph.ayamsejahtera.R;
 import edu.uph.ayamsejahtera.adapter.KandangAdapter;
 import edu.uph.ayamsejahtera.databinding.FragmentUtamaBinding;
 import edu.uph.ayamsejahtera.model.Kandang;
@@ -41,6 +45,20 @@ public class UtamaFragment extends Fragment {
         utamaViewModel = new ViewModelProvider(requireActivity()).get(UtamaViewModel.class);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        TextView textViewWelcome = view.findViewById(R.id.text_username);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("AplikasiLogin", Context.MODE_PRIVATE);
+
+        // Ambil username yang tersimpan. "Guest" adalah nilai default jika data tidak ditemukan.
+        String username = sharedPreferences.getString("USERNAME_KEY", "Guest");
+
+        // Tampilkan username
+        textViewWelcome.setText("Hai, " + username + "!");
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -48,23 +66,10 @@ public class UtamaFragment extends Fragment {
         View root = binding.getRoot();
 
         // Memanggil metode untuk mengatur setiap bagian UI
-        setupGreeting();
         setupKandangList();
         setupNavigationButtons();
 
         return root;
-    }
-
-    private void setupGreeting() {
-        // Pastikan ID 'text_username' ada di file fragment_utama.xml Anda
-        final TextView textViewUsername = binding.textUsername;
-
-        // Mengambil data username dari ViewModel dan menampilkannya
-        utamaViewModel.getUsername().observe(getViewLifecycleOwner(), name -> {
-            if (name != null && !name.isEmpty()) {
-                textViewUsername.setText("Hai, " + name);
-            }
-        });
     }
 
     private void setupKandangList() {
@@ -96,6 +101,9 @@ public class UtamaFragment extends Fragment {
 
         binding.btnJadwalVaksin.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), JadwalVaksinAyamActivity.class)));
+
+        binding.btnNotification.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), NotificationActivity.class)));
     }
 
 

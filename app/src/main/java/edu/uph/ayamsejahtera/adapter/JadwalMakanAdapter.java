@@ -37,7 +37,7 @@ public class JadwalMakanAdapter extends ArrayAdapter<JadwalMakan> {
         TextView tvTanggal = convertView.findViewById(R.id.value_Tanggal_1);
         TextView tvWaktuMakan = convertView.findViewById(R.id.value_waktuMakan_1);
         TextView tvJumlahPorsi = convertView.findViewById(R.id.value_jumlahPorsi_1);
-        ImageView imvDelete = convertView.findViewById(R.id.delete_icon_1); // Pastikan ID ini benar
+        ImageView imvDelete = convertView.findViewById(R.id.delete_icon_1);
 
         if (jadwalmakan != null) {
             tvTitle.setText("Jadwal ID: " + jadwalmakan.getIdJadwal());

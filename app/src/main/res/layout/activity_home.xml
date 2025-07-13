@@ -108,20 +108,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="24dp"
-                android:text="Masuk Melalui Email"
+                android:text="Masuk"
                 android:textColor="@color/white"
                 app:backgroundTint="#D9A689"
                 app:cornerRadius="28dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/phoneButton"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="16dp"
-                android:text="Masuk Melalui Nomor HP"
-                android:textColor="@color/white"
-                app:backgroundTint="#D9A689"
-                app:cornerRadius="28dp" />
+
 
         </LinearLayout>
 

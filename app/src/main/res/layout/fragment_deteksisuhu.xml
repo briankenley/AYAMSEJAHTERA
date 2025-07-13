@@ -53,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:background="@array/kandang_options"
+                        android:entries="@array/kandang_options"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp" />
                 </RelativeLayout>

@@ -2,8 +2,11 @@ package edu.uph.ayamsejahtera;
 
 import android.content.Intent; // <-- Tambahkan import ini
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View; // <-- Tambahkan import ini
 import android.widget.TextView; // <-- Tambahkan import ini
+import android.widget.Toast;
+
 import com.google.android.material.button.MaterialButton; // <-- Tambahkan import ini
 
 import androidx.activity.EdgeToEdge;
@@ -26,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         MaterialButton emailButton = findViewById(R.id.emailButton);
-        MaterialButton phoneButton = findViewById(R.id.phoneButton);
         MaterialButton faceIdButton = findViewById(R.id.faceIdButton);
         MaterialButton googleButton = findViewById(R.id.googleButton);
         TextView loginLink = findViewById(R.id.loginLink);
@@ -39,11 +41,25 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
+        faceIdButton = findViewById(R.id.faceIdButton);
+        faceIdButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Ini faceIdButton", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.BOTTOM | Gravity.RIGHT, 0, 0);
+                toast.show();
+            }
+        });
+
+        googleButton = findViewById(R.id.googleButton);
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Ini googleButton", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.BOTTOM | Gravity.RIGHT, 0, 0);
+                toast.show();
+            }
+        });
+
         emailButton.setOnClickListener(goToLoginListener);
-        phoneButton.setOnClickListener(goToLoginListener);
-        loginLink.setOnClickListener(goToLoginListener);
-        faceIdButton.setOnClickListener(goToLoginListener);
-        googleButton.setOnClickListener(goToLoginListener);
 
     }
 }

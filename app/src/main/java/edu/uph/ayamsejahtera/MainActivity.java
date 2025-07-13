@@ -42,16 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_utama, R.id.navigation_deteksi_suhu, R.id.navigation_akun)
+                R.id.halaman_utama, R.id.halaman_deteksisuhu, R.id.halaman_akun)
                 .build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        String username = getIntent().getStringExtra("USERNAME_EXTRA");
-        if (username != null) {
-            UtamaViewModel utamaViewModel = new ViewModelProvider(this).get(UtamaViewModel.class);
-            utamaViewModel.setUsername(username);
-        }
     }
 }

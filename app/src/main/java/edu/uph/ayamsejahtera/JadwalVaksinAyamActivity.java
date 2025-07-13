@@ -26,8 +26,6 @@ public class JadwalVaksinAyamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal_vaksin_ayam);
 
-        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
-
         realm = Realm.getDefaultInstance();
 
         lsvJadwalVaksin = findViewById(R.id.lsvJadwalVaksinAyam);
