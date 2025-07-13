@@ -43,19 +43,13 @@ public class TambahKandangActivity extends AppCompatActivity {
         edtJumlahAyam = findViewById(R.id.edtJumlahAyam);
         spinnerStatus = findViewById(R.id.spinnerStatus);
 
-        // Anda bisa hapus bagian SharedPreferences ini jika tidak diperlukan
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        String usernamedef = getResources().getString(R.string.username_key);
-        String username = sharedPref.getString(getString(R.string.username_key), usernamedef);
-        edtNamaKandang.setText(username);
-
         btnSimpan.setOnClickListener(v -> {
-            // [FIX 2] Validasi input sebelum menyimpan
+            //Validasi input sebelum menyimpan
             String namaKandangStr = edtNamaKandang.getText().toString().trim();
             String kapasitasStr = edtKapasitas.getText().toString().trim();
             String jumlahAyamStr = edtJumlahAyam.getText().toString().trim();
 
-            if (TextUtils.isEmpty(namaKandangStr) || TextUtils.isEmpty(kapasitasStr) || TextUtils.isEmpty(jumlahAyamStr)) {
+            if (namaKandangStr.isEmpty() || kapasitasStr.isEmpty() || jumlahAyamStr.isEmpty()) {
                 Toast.makeText(this, "Semua kolom harus diisi", Toast.LENGTH_SHORT).show();
             } else {
                 simpanData();
