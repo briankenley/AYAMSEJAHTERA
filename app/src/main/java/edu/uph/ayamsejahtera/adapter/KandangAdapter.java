@@ -78,11 +78,10 @@ public class KandangAdapter extends ArrayAdapter<Kandang> {
             Kandang itemToDelete = r.where(Kandang.class).equalTo("kandangID", kandang.getKandangID()).findFirst();
             if (itemToDelete != null) {
                 itemToDelete.deleteFromRealm();
-                // Hapus dari dataset adapter dan notifikasi perubahan
-                dataSet.remove(position);
+                remove(kandang);
+
                 notifyDataSetChanged();
             }
         });
-        realm.close();
     }
 }

@@ -10,9 +10,13 @@ public class UtamaViewModel extends ViewModel {
 
     public UtamaViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+
+    }
+    public void setGreeting(String username) {
+        mText.setValue("Hai, " + username);
     }
 
+    // Metode ini sekarang akan mengembalikan sapaan dinamis
     public LiveData<String> getText() {
         return mText;
     }

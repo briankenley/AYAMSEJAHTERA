@@ -8,22 +8,22 @@ import io.realm.annotations.PrimaryKey;
 public class JadwalMakan extends RealmObject {
 
     @PrimaryKey
-    private String idJadwalMakan; //
+    private int idJadwal;
     private Date tanggal;
     private RealmList<String> waktuMakan;
     private double jumlahPorsi;
 
-    // Diperlukan constructor kosong oleh Realm
+    // Constructor kosong
     public JadwalMakan() {
     }
 
-    // Getters and Setters
-    public String getIdJadwalMakan() {
-        return idJadwalMakan;
+    // Getters and Setters yang sudah disesuaikan
+    public int getIdJadwal() {
+        return idJadwal;
     }
 
-    public void setIdJadwalMakan(String idJadwalMakan) { // <-- PERBAIKAN
-        this.idJadwalMakan = idJadwalMakan;
+    public void setIdJadwal(int idJadwal) {
+        this.idJadwal = idJadwal;
     }
 
     public Date getTanggal() {

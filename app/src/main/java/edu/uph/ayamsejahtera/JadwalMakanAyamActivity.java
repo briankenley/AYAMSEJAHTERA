@@ -24,8 +24,9 @@ public class JadwalMakanAyamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal_makan_ayam);
 
-        realm = Realm.getDefaultInstance();
+        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
 
+        realm = Realm.getDefaultInstance();
         lsvJadwalMakanAyam = findViewById(R.id.lsvJadwalMakanAyam);
         Button buttonTambah = findViewById(R.id.btnTambah);
 
@@ -33,28 +34,19 @@ public class JadwalMakanAyamActivity extends AppCompatActivity {
             Intent intent = new Intent(JadwalMakanAyamActivity.this, TambahJadwalMakanAyamActivity.class);
             startActivity(intent);
         });
-
-        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         loadJadwalMakan();
     }
 
     private void loadJadwalMakan() {
         RealmResults<JadwalMakan> jadwalMakanResults = realm.where(JadwalMakan.class).findAll();
-        // Menggunakan RealmResults secara langsung lebih efisien
-        adapter = new JadwalMakanAdapter(this, realm.copyFromRealm(jadwalMakanResults));
+        ArrayList<JadwalMakan> list = new ArrayList<>(realm.copyFromRealm(jadwalMakanResults));
+        adapter = new JadwalMakanAdapter(this, list);
         lsvJadwalMakanAyam.setAdapter(adapter);
+        jadwalMakanResults.addChangeListener(results -> adapter.notifyDataSetChanged());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (realm != null && !realm.isClosed()) {
-            realm.close();
         }
     }
-}

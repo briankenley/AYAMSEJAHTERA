@@ -18,7 +18,7 @@ import io.realm.RealmList;
 
 public class TambahJadwalMakanAyamActivity extends AppCompatActivity {
 
-    private EditText editTextIdKandang, editTextTanggal, editTextWaktu1, editTextWaktu2, editTextWaktu3, editTextWaktu4, editTextJumlahPorsi;
+    private EditText editTextTanggal, editTextWaktu1, editTextWaktu2, editTextWaktu3, editTextWaktu4, editTextJumlahPorsi;
     private Button buttonSimpan;
     private Realm realm;
 
@@ -29,7 +29,6 @@ public class TambahJadwalMakanAyamActivity extends AppCompatActivity {
 
         realm = Realm.getDefaultInstance();
 
-        editTextIdKandang = findViewById(R.id.editTextIdKandang);
         editTextTanggal = findViewById(R.id.editTextTanggal);
         editTextWaktu1 = findViewById(R.id.editTextWaktu1);
         editTextWaktu2 = findViewById(R.id.editTextWaktu2);
@@ -44,11 +43,10 @@ public class TambahJadwalMakanAyamActivity extends AppCompatActivity {
 
     private void simpanJadwal() {
 
-        String idJadwal = editTextIdKandang.getText().toString().trim();
         String tanggalStr = editTextTanggal.getText().toString().trim();
         String porsiStr = editTextJumlahPorsi.getText().toString().trim();
 
-        if (idJadwal.isEmpty() || tanggalStr.isEmpty() || porsiStr.isEmpty()) {
+        if (tanggalStr.isEmpty() || porsiStr.isEmpty()) {
             Toast.makeText(this, "Semua field wajib diisi", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -65,7 +63,10 @@ public class TambahJadwalMakanAyamActivity extends AppCompatActivity {
         }
 
         realm.executeTransaction(r -> {
-            JadwalMakan jadwal = r.createObject(JadwalMakan.class, idJadwal);
+            Number maxId = r.where(JadwalMakan.class).max("idJadwal");
+            int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
+
+            JadwalMakan jadwal = r.createObject(JadwalMakan.class, nextId);
 
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
@@ -88,8 +89,5 @@ public class TambahJadwalMakanAyamActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (realm != null && !realm.isClosed()) {
-            realm.close();
         }
     }
-}

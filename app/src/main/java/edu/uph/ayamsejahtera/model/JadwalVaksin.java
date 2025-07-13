@@ -8,7 +8,7 @@ import io.realm.annotations.Required;
 public class JadwalVaksin extends RealmObject {
 
     @PrimaryKey
-    private String id;
+    private int idVaksin;
 
     @Required
     private String idKandang;
@@ -21,13 +21,13 @@ public class JadwalVaksin extends RealmObject {
 
     public JadwalVaksin() {}
 
-    // Getters and Setters
-    public String getId() {
-        return id;
+    // Getters and Setters disesuaikan
+    public int getIdVaksin() {
+        return idVaksin;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdVaksin(int idVaksin) {
+        this.idVaksin = idVaksin;
     }
 
     public String getIdKandang() {

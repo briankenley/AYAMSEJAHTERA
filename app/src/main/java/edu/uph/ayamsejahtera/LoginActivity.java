@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
@@ -17,9 +19,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
-        // [DIHAPUS] Semua kode inisialisasi Realm dan SharedPreferences dihapus dari sini.
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .name("ayamsejahtera.realm")
+                .schemaVersion(1)
+                .allowWritesOnUiThread(true)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
+
+        setContentView(R.layout.activity_login);
 
         edtUsername = findViewById(R.id.edtUsername);
         edtPassword = findViewById(R.id.edtPassword);

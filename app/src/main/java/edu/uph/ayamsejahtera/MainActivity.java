@@ -2,6 +2,7 @@ package edu.uph.ayamsejahtera;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment; // Pastikan import ini benar
 import androidx.navigation.ui.AppBarConfiguration;
@@ -10,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uph.ayamsejahtera.R;
 import edu.uph.ayamsejahtera.databinding.ActivityMainBinding;
+import edu.uph.ayamsejahtera.ui.utama.UtamaViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,5 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        String username = getIntent().getStringExtra("USERNAME_EXTRA");
+        if (username != null) {
+            UtamaViewModel utamaViewModel = new ViewModelProvider(this).get(UtamaViewModel.class);
+            utamaViewModel.setUsername(username);
+        }
     }
 }

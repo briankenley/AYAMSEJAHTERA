@@ -2,9 +2,13 @@ package edu.uph.ayamsejahtera;
 
 import android.content.Intent; // Impor Intent
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View; // Impor View
 import android.widget.Button; // Impor Button
+import android.widget.ImageView;
 import android.widget.ListView; // Impor ListView
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList; // Impor ArrayList
 import edu.uph.ayamsejahtera.adapter.KandangAdapter; // Impor Adapter Anda
@@ -15,6 +19,8 @@ import io.realm.RealmResults; // Impor RealmResults
 public class DaftarKandangActivity extends AppCompatActivity {
 
     private Button btnTambah;
+
+    private ImageView edit_icon_1;
     private ListView lsvDaftarKandang;
     private Realm realm;
     private KandangAdapter adapter;
@@ -22,51 +28,38 @@ public class DaftarKandangActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
-
         super.onCreate(savedInstanceState);
         // EdgeToEdge dan WindowInsets listener biarkan seperti semula
         setContentView(R.layout.activity_daftar_kandang);
 
-        realm = Realm.getDefaultInstance(); // Inisialisasi Realm
+        findViewById(R.id.back_arrow).setOnClickListener(v -> finish());
 
-        btnTambah = findViewById(R.id.btnTambah); // Ganti ID jika berbeda di XML Anda
+        realm = Realm.getDefaultInstance();
+
+        btnTambah = findViewById(R.id.btnTambah);
         lsvDaftarKandang = findViewById(R.id.lsvDaftarKandang);
 
-        btnTambah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke TambahKandangActivity
-                Intent intent = new Intent(DaftarKandangActivity.this, TambahKandangActivity.class);
-                startActivity(intent);
-            }
+        btnTambah.setOnClickListener(v -> {
+            Intent intent = new Intent(DaftarKandangActivity.this, TambahKandangActivity.class);
+            startActivity(intent);
         });
 
-        // Panggil method untuk menampilkan data
+        // Panggil method untuk menampilkan data awal
         loadKandangData();
     }
+
 
     private void loadKandangData() {
         RealmResults<Kandang> kandangResults = realm.where(Kandang.class).findAll();
-        ArrayList<Kandang> kandangList = new ArrayList<>(realm.copyFromRealm(kandangResults));
+        ArrayList<Kandang> kandangList = new ArrayList<>(realm.copyFromRealm(kandangResults)); // Data disalin
+
         adapter = new KandangAdapter(this, kandangList);
         lsvDaftarKandang.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Muat ulang data setiap kali activity ini kembali ditampilkan
-        // untuk merefleksikan data baru atau perubahan
-        loadKandangData();
+        kandangResults.addChangeListener(kandang -> adapter.notifyDataSetChanged());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Tutup instance Realm untuk menghindari memory leak
-        if (realm != null && !realm.isClosed()) {
-            realm.close();
-        }
     }
 }
