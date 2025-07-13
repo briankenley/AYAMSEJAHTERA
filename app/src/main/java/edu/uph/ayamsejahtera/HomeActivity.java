@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-        faceIdButton = findViewById(R.id.faceIdButton);
         faceIdButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Ini faceIdButton", Toast.LENGTH_LONG);
@@ -50,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        googleButton = findViewById(R.id.googleButton);
         googleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Ini googleButton", Toast.LENGTH_LONG);
@@ -60,6 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         emailButton.setOnClickListener(goToLoginListener);
+        loginLink.setOnClickListener(goToLoginListener);
 
     }
 }
