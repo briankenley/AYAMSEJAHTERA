@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        faceIdButton = findViewById(R.id.faceIdButton);
         faceIdButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Ini faceIdButton", Toast.LENGTH_LONG);
@@ -62,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        googleButton = findViewById(R.id.googleButton);
         googleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Ini googleButton", Toast.LENGTH_LONG);
