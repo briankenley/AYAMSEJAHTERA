@@ -1,6 +1,9 @@
 package edu.uph.ayamsejahtera;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -72,9 +75,31 @@ public class TambahVaksinasiAyamActivity extends AppCompatActivity {
         Toast.makeText(TambahVaksinasiAyamActivity.this, "Jadwal vaksin berhasil disimpan!", Toast.LENGTH_SHORT).show();
         finish();
     }
+    public void bersihkanForm() {
+        editTextIdKandang.setText("");
+        editTextTanggal.setText("");
+        editTextWaktu.setText("");
+        if (spinnerJenisVaksin != null) { // Tambahkan pengecekan null untuk keamanan
+            spinnerJenisVaksin.setSelection(0);
+        }
+    }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_daftarkandang, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.mBersihkanForm) {
+            bersihkanForm();
+            return true;
+        } else if (item.getItemId() == R.id.mPengaturan) {
+            // Logika untuk pengaturan
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
