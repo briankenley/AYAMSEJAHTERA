@@ -69,14 +69,4 @@ public class Kandang extends RealmObject {
         this.kandangID = kandangID;
     }
 
-    @Override
-    public String toString() {
-        return "Kandang{" +
-                "namaKandang='" + namaKandang + '\'' +
-                ", kandangID=" + kandangID + // Corrected: removed extra quote here
-                ", kapasitas='" + kapasitas + '\'' +
-                ", jumlahAyam='" + jumlahAyam + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
 }

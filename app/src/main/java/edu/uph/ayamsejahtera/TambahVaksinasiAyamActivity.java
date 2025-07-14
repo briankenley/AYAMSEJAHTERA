@@ -96,10 +96,7 @@ public class TambahVaksinasiAyamActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.mBersihkanForm) {
             bersihkanForm();
             return true;
-        } else if (item.getItemId() == R.id.mPengaturan) {
-            // Logika untuk pengaturan
-            return true;
-        }
+        } 
         return super.onOptionsItemSelected(item);
     }
 }

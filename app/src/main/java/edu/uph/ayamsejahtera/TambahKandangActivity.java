@@ -37,7 +37,6 @@ public class TambahKandangActivity extends AppCompatActivity {
         });
 
         edtNamaKandang = findViewById(R.id.edtNamaKandang);
-        edtIdKandang = findViewById(R.id.edtIdKandang);
         btnSimpan = findViewById(R.id.btnSimpan);
         edtKapasitas = findViewById(R.id.edtKapasitas);
         edtJumlahAyam = findViewById(R.id.edtJumlahAyam);
@@ -99,9 +98,6 @@ public class TambahKandangActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.mBersihkanForm) {
             bersihkanForm();
-            return true;
-        } else if (item.getItemId() == R.id.mPengaturan) {
-            // Logika untuk pengaturan
             return true;
         }
         return super.onOptionsItemSelected(item);
